@@ -17,7 +17,7 @@ TEST_F(SoundexTest, BasicTests) {
 
     // Test for "Jack"
     generateSoundex("Jack", soundex);
-    ASSERT_STREQ(soundex, "J022");
+    ASSERT_STREQ(soundex, "J200");
 
     // Test for "Schm"
     generateSoundex("Schm", soundex);
