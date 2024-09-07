@@ -47,19 +47,17 @@ void generateSoundex(const char *name, char *soundex) {
     int sIndex = 1;
     char lastCode = soundexTable[(int)name[0]];  // Get Soundex code for the first character
 
-    // Single loop and condition to reduce complexity
+    // Single loop, no additional conditions to reduce complexity
     for (int i = 1; name[i] != '\0' && sIndex < 4; i++) {
         char code = soundexTable[(int)name[i]];  // Get the Soundex code from the table
-        if (code != '0' && code != lastCode) {   // Add non-zero and non-duplicate code
+        if (code > '0' && code != lastCode) {   // Add non-zero and non-duplicate code
             soundex[sIndex++] = code;
+            lastCode = code;  // Update the lastCode only when adding new code
         }
-        lastCode = code;  // Update the lastCode to the current one
     }
 
     // Pad with zeroes if necessary
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
-    }
+    memset(soundex + sIndex, '0', 4 - sIndex);  // Fill remaining positions with '0'
 
     soundex[4] = '\0';  // Null-terminate the result
 }
