@@ -33,11 +33,11 @@ TEST_F(SoundexTest, BasicTests) {
 
     // Test for "Roby"
     generateSoundex("Roby", soundex);
-    ASSERT_STREQ(soundex, "R010");
+    ASSERT_STREQ(soundex, "R100");
 
     // Test for "Rubi"
     generateSoundex("Rubi", soundex);
-    ASSERT_STREQ(soundex, "R010");
+    ASSERT_STREQ(soundex, "R100");
 }
 
 TEST_F(SoundexTest, EdgeCases) {
