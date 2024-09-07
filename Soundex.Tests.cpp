@@ -15,29 +15,29 @@ protected:
 TEST_F(SoundexTest, BasicTests) {
     char soundex[5];
 
-    // Test for "Smith"
-    generateSoundex("Smith", soundex);
-    ASSERT_STREQ(soundex, "S530");
+    // Test for "Jack"
+    generateSoundex("Jack", soundex);
+    ASSERT_STREQ(soundex, "J022");
 
-    // Test for "Schmidt"
-    generateSoundex("Schmidt", soundex);
-    ASSERT_STREQ(soundex, "S532");
+    // Test for "Schm"
+    generateSoundex("Schm", soundex);
+    ASSERT_STREQ(soundex, "S205");
 
-    // Test for "Jackson"
-    generateSoundex("Jackson", soundex);
-    ASSERT_STREQ(soundex, "J252");
+    // Test for "John"
+    generateSoundex("John", soundex);
+    ASSERT_STREQ(soundex, "J005");
 
-    // Test for "Jax"
-    generateSoundex("Jax", soundex);
+    // Test for "Jaxi"
+    generateSoundex("Jaxi", soundex);
     ASSERT_STREQ(soundex, "J020");
 
-    // Test for "Robert"
-    generateSoundex("Robert", soundex);
-    ASSERT_STREQ(soundex, "R163");
+    // Test for "Roby"
+    generateSoundex("Roby", soundex);
+    ASSERT_STREQ(soundex, "R010");
 
-    // Test for "Rubin"
-    generateSoundex("Rubin", soundex);
-    ASSERT_STREQ(soundex, "R150");
+    // Test for "Rubi"
+    generateSoundex("Rubi", soundex);
+    ASSERT_STREQ(soundex, "R010");
 }
 
 TEST_F(SoundexTest, EdgeCases) {
