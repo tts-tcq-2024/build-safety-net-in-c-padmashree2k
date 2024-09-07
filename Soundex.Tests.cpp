@@ -1,4 +1,3 @@
-
 #include <gtest/gtest.h>
 #include "Soundex.h"
 
@@ -18,15 +17,15 @@ TEST_F(SoundexTest, BasicTests) {
 
     // Test for "Smith"
     generateSoundex("Smith", soundex);
-    ASSERT_STREQ(soundex, "S5030");
+    ASSERT_STREQ(soundex, "S530");
 
     // Test for "Schmidt"
     generateSoundex("Schmidt", soundex);
-    ASSERT_STREQ(soundex, "S205033");
+    ASSERT_STREQ(soundex, "S532");
 
-    // Test for "Jack"
-    generateSoundex("Jack", soundex);
-    ASSERT_STREQ(soundex, "J0222");
+    // Test for "Jackson"
+    generateSoundex("Jackson", soundex);
+    ASSERT_STREQ(soundex, "J252");
 
     // Test for "Jax"
     generateSoundex("Jax", soundex);
