@@ -1,39 +1,64 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
-// Precomputed Soundex table for all ASCII characters
-const char soundexTable[128] = {
-    ['A'] = '0', ['B'] = '1', ['C'] = '2', ['D'] = '3', ['E'] = '0',
-    ['F'] = '1', ['G'] = '2', ['H'] = '0', ['I'] = '0', ['J'] = '2',
-    ['K'] = '2', ['L'] = '4', ['M'] = '5', ['N'] = '5', ['O'] = '0',
-    ['P'] = '1', ['Q'] = '2', ['R'] = '6', ['S'] = '2', ['T'] = '3',
-    ['U'] = '0', ['V'] = '1', ['W'] = '0', ['X'] = '2', ['Y'] = '0',
-    ['Z'] = '2', ['a'] = '0', ['b'] = '1', ['c'] = '2', ['d'] = '3',
-    ['e'] = '0', ['f'] = '1', ['g'] = '2', ['h'] = '0', ['i'] = '0',
-    ['j'] = '2', ['k'] = '2', ['l'] = '4', ['m'] = '5', ['n'] = '5',
-    ['o'] = '0', ['p'] = '1', ['q'] = '2', ['r'] = '6', ['s'] = '2',
-    ['t'] = '3', ['u'] = '0', ['v'] = '1', ['w'] = '0', ['x'] = '2',
-    ['y'] = '0', ['z'] = '2'};
+char soundexTable[128];
+
+void initializeSoundexTable() {
+    // Initialize the whole table to '0' by default
+    memset(soundexTable, '0', sizeof(soundexTable));
+
+    // Manually assign values for the relevant letters
+    soundexTable['B'] = soundexTable['b'] = '1';
+    soundexTable['F'] = soundexTable['f'] = '1';
+    soundexTable['P'] = soundexTable['p'] = '1';
+    soundexTable['V'] = soundexTable['v'] = '1';
+
+    soundexTable['C'] = soundexTable['c'] = '2';
+    soundexTable['G'] = soundexTable['g'] = '2';
+    soundexTable['J'] = soundexTable['j'] = '2';
+    soundexTable['K'] = soundexTable['k'] = '2';
+    soundexTable['Q'] = soundexTable['q'] = '2';
+    soundexTable['S'] = soundexTable['s'] = '2';
+    soundexTable['X'] = soundexTable['x'] = '2';
+    soundexTable['Z'] = soundexTable['z'] = '2';
+
+    soundexTable['D'] = soundexTable['d'] = '3';
+    soundexTable['T'] = soundexTable['t'] = '3';
+
+    soundexTable['L'] = soundexTable['l'] = '4';
+
+    soundexTable['M'] = soundexTable['m'] = '5';
+    soundexTable['N'] = soundexTable['n'] = '5';
+
+    soundexTable['R'] = soundexTable['r'] = '6';
+}
 
 void generateSoundex(const char *name, char *soundex) {
+    static int initialized = 0;  // Track if the table is initialized
+    if (!initialized) {
+        initializeSoundexTable();
+        initialized = 1;  // Mark as initialized
+    }
+
     soundex[0] = toupper(name[0]);  // First character is retained as-is
     int sIndex = 1;
     char lastCode = soundexTable[(int)name[0]];  // Get Soundex code for the first character
 
+    // Single loop and condition to reduce complexity
     for (int i = 1; name[i] != '\0' && sIndex < 4; i++) {
         char code = soundexTable[(int)name[i]];  // Get the Soundex code from the table
         if (code != '0' && code != lastCode) {   // Add non-zero and non-duplicate code
             soundex[sIndex++] = code;
         }
-        lastCode = code;
+        lastCode = code;  // Update the lastCode to the current one
     }
 
+    // Pad with zeroes if necessary
     while (sIndex < 4) {
-        soundex[sIndex++] = '0';  // Pad with zeroes if necessary
+        soundex[sIndex++] = '0';
     }
 
     soundex[4] = '\0';  // Null-terminate the result
