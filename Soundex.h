@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
-char soundexTable[128];
+char soundexTable[128] = {0};
 
 void initializeSoundexTable() {
     // Initialize the whole table to '0' by default
@@ -44,15 +44,25 @@ void generateSoundex(const char *name, char *soundex) {
         initialized = 1;
     }
 
+    if (name == NULL || name[0] == '\0') {
+        strcpy(soundex, "0000");
+        return;
+    }
+
     soundex[0] = toupper(name[0]);  // Retain the first character as-is
     char lastCode = soundexTable[(int)name[0]];
-
-    // Fixed path: a simple loop without conditions
     int sIndex = 1;
-    for (int i = 1; i < 4; ++i) {
+
+    for (int i = 1; name[i] != '\0' && sIndex < 4; ++i) {
         char code = soundexTable[(int)name[i]];
-        soundex[sIndex++] = (code != lastCode && code > '0') ? code : '0';
+        if (code != '0' && code != lastCode) {
+            soundex[sIndex++] = code;
+        }
         lastCode = code;
+    }
+
+    while (sIndex < 4) {
+        soundex[sIndex++] = '0';  // Pad with zeroes if necessary
     }
 
     soundex[4] = '\0';  // Null-terminate the result
