@@ -25,7 +25,7 @@ TEST_F(SoundexTest, BasicTests) {
 
     // Test for "John"
     generateSoundex("John", soundex);
-    ASSERT_STREQ(soundex, "J005");
+    ASSERT_STREQ(soundex, "J500");
 
     // Test for "Jaxi"
     generateSoundex("Jaxi", soundex);
@@ -45,7 +45,7 @@ TEST_F(SoundexTest, EdgeCases) {
 
     // Test for empty string
     generateSoundex("", soundex);
-    ASSERT_STREQ(soundex, "1000");
+    ASSERT_STREQ(soundex, "0000");
 
     // Test for single character
     generateSoundex("A", soundex);
