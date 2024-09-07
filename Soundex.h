@@ -17,8 +17,7 @@ const char soundexTable[128] = {
     ['j'] = '2', ['k'] = '2', ['l'] = '4', ['m'] = '5', ['n'] = '5',
     ['o'] = '0', ['p'] = '1', ['q'] = '2', ['r'] = '6', ['s'] = '2',
     ['t'] = '3', ['u'] = '0', ['v'] = '1', ['w'] = '0', ['x'] = '2',
-    ['y'] = '0', ['z'] = '2'
-};
+    ['y'] = '0', ['z'] = '2'};
 
 void generateSoundex(const char *name, char *soundex) {
     soundex[0] = toupper(name[0]);  // First character is retained as-is
