@@ -29,7 +29,7 @@ TEST_F(SoundexTest, BasicTests) {
 
     // Test for "Jaxi"
     generateSoundex("Jaxi", soundex);
-    ASSERT_STREQ(soundex, "J020");
+    ASSERT_STREQ(soundex, "J200");
 
     // Test for "Roby"
     generateSoundex("Roby", soundex);
