@@ -37,27 +37,28 @@ void initializeSoundexTable() {
 }
 
 void generateSoundex(const char *name, char *soundex) {
-    static int initialized = 0;  // Track if the table is initialized
+    // Only check the initialization once using a static flag
+    static int initialized = 0;
     if (!initialized) {
         initializeSoundexTable();
-        initialized = 1;  // Mark as initialized
+        initialized = 1;
     }
 
-    soundex[0] = toupper(name[0]);  // First character is retained as-is
+    soundex[0] = toupper(name[0]);  // Retain the first character as-is
     int sIndex = 1;
-    char lastCode = soundexTable[(int)name[0]];  // Get Soundex code for the first character
+    char lastCode = soundexTable[(int)name[0]];
 
-    // Single loop, no additional conditions to reduce complexity
+    // Combine code addition and duplicate prevention into the loop
     for (int i = 1; name[i] != '\0' && sIndex < 4; i++) {
-        char code = soundexTable[(int)name[i]];  // Get the Soundex code from the table
-        if (code > '0' && code != lastCode) {   // Add non-zero and non-duplicate code
+        char code = soundexTable[(int)name[i]];
+        if (code > '0' && code != lastCode) {  // Check non-zero and non-duplicate codes
             soundex[sIndex++] = code;
-            lastCode = code;  // Update the lastCode only when adding new code
+            lastCode = code;
         }
     }
 
-    // Pad with zeroes if necessary
-    memset(soundex + sIndex, '0', 4 - sIndex);  // Fill remaining positions with '0'
+    // Pad remaining spaces with zeroes
+    memset(soundex + sIndex, '0', 4 - sIndex);
 
     soundex[4] = '\0';  // Null-terminate the result
 }
