@@ -15,11 +15,11 @@ protected:
 TEST_F(SoundexTest, BasicTests) {
     char soundex[5];
 
-    // Test for "Jack"
+    // Test for "Jk"
     generateSoundex("Jack", soundex);
     ASSERT_STREQ(soundex, "J200");
 
-    // Test for "Schm"
+    // Test for "Sch"
     generateSoundex("Schm", soundex);
     ASSERT_STREQ(soundex, "S500");
 
