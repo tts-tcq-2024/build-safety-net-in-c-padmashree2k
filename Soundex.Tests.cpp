@@ -12,17 +12,21 @@ protected:
     }
 };
 
-TEST_F(SoundexTest, BasicTests) {
+TEST_F(SoundexTest, ReatainFirstChar) {
     char soundex[5];
 
-    // Test for "Jk"
-    generateSoundex("Jack", soundex);
-    ASSERT_STREQ(soundex, "J200");
-
-    // Test for "Sch"
+    // Test for "Schm"
     generateSoundex("Schm", soundex);
     ASSERT_STREQ(soundex, "S500");
+}
 
+TEST_F(SoundexTest, ReplaceConsonentsWithApptDigitAndVowelsWithZero) {
+    char soundex[5];
+
+    // Test for "Jack"
+    generateSoundex("Jack", soundex);
+    ASSERT_STREQ(soundex, "J200");
+    
     // Test for "John"
     generateSoundex("John", soundex);
     ASSERT_STREQ(soundex, "J500");
@@ -40,7 +44,7 @@ TEST_F(SoundexTest, BasicTests) {
     ASSERT_STREQ(soundex, "R100");
 }
 
-TEST_F(SoundexTest, EdgeCases) {
+TEST_F(SoundexTest, PaddingWithZeroforPendingBits) {
     char soundex[5];
 
     // Test for single character
