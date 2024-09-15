@@ -1,0 +1,21 @@
+SL No.	     Test Case Name	                                             Test Case Discription 	                                                Input String	    Expected Output
+  1.	      ReatainFirstChar	               The first character of the input string is retained as it is given in soundex.h	                      Sch	                S500
+			                                                                                                                                              Am	                A500
+			                                                                                                                                              Pm	                P500
+			                                                                                                                                              Padma	              P350
+			                                                                                                                                              Shubham	            S150
+				
+  2.	ReplaceConsonentsWithApptDigitAndVowelsWithZero	  All consonants in the input string are replaced with their corresponding soundex digit	    Jack	              J200
+			                                                                                                                                              John	              J500
+			                                                                                                                                              Jaxi	              J200
+			                                                                                                                                              Roby	              R100
+			                                                                                                                                              Rubi	              R100
+				
+  3.	PaddingWithZeroforPendingBits	         If the length of the input string is less that 4, then it the remiaining size gets padded	            A	                  A000
+			                                                                                                                                              B	                  B000
+			                                                                                                                                              C	                  C000
+				
+  4.  InitializationCheck	                       Force initialization of the table and check functionality	                                        Test	              T230
+				
+  5. 	RetainsFirstVowelCharAndPadsTheLast3bytes	 Test for a string with all same vovwel characters resulting in the same code	                      AAAA	              A000
+			                                                                                                                                              EEEE	              E000
